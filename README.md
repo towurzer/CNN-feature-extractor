@@ -21,3 +21,22 @@ src/
 model/						# trained models (.pth)
 logs/						# logs
 ```
+
+## Responsibilities
+### Giuly:
+* Step 1: Choose a Dataset  
+* Step 3: Process the Images (image size 224x224)
+
+### Tobi:
+* Step 2: Choose a CNN Model 
+* Step 4: Extract CNN - Features (implement forward hook)
+
+### Sebi:
+* Step 5: Reduce Dimensions & Plot
+
+### Maky: 
+* Step 6: Clustering
+
+### Together:
+* Finalize Report (2-3 Pages)
+* Build presentation (max 10 Slides)
