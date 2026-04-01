@@ -1,5 +1,33 @@
 from config import Config
+from efficientNet import EfficientNet
+import utils
+import dataset
+import extractionhandler
 
 if __name__ == "__main__":
-	# Load Configuration
-	config = Config()
+	print("Starting EfficientNet")
+	config = Config()  # Load Configuration
+	utils.create_dir(config)  # create directories to store dataset as well as the scatter plots and clustering
+	print("Loaded config, created directories")
+
+	extractionResults = None
+
+	# Check for cached results to save computation time
+	if not config.ALWAYS_EXTRACT:
+		print("Try to load extraction results from cache")
+		extractionResults = utils.loadExtractionResults(config)
+
+	# If no cache is available or the configuration specifies that we should not use our cache, run the CNN
+	if extractionResults is None:
+		print("Download Dataset, Create Dataloader")
+		dataloader = dataset.get_dataloader(config)  # download the dataset, crate and return the dataloader
+		print("Dataloader Created, creating the model, loading pretrained weights, registering the hook")
+		model = EfficientNet(train=False)  # download the model, apply weights and register the forward hook
+		print("Model Loaded, starting Feature Extraction...")
+		extractionResults = extractionhandler.extract_features(dataloader, model) # run the classification and feature extraction
+		print(f"Extraction Complete! Total images processed: {len(extractionResults)}")
+		print("Saving results to cache...")
+		utils.saveExtractionResults(config, extractionResults) # Save results for fast future use
+
+	print("Plotting and stuff")
+	print(extractionResults[0]) # TEMP

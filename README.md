@@ -10,16 +10,17 @@ The goal of this assignment is to implement a complete pipeline that:
 ## Project Structure
 ```text
 src/
-	/dataset				# Auto Generated Folder with the dataset
-	config.py				# Model / Training Settings and Hyperparameters
-	dataset.py				# Data Pipeline: Downloads and filters the CIFAR-10 Dataset
-	main.py					# Manages the whole pipeline, loading, setup, data preparation, and model trainer initialization
-	model.py				# Model Architecture
-	model_trainer.py		# Manages the training loop, evaluation and logging
-	visualizer.py           # visualizes the extracted features in 2D
-	utils.py				# Utility functions to help seed the model trainer and more helper functions
-model/						# trained models (.pth)
-logs/						# logs
+    config.py               # Settings
+    dataset.py              # Data Pipeline: Downloads and filters the Dataset
+    main.py                 # Manages the whole pipeline 
+    extractionhandler.py    # Batch processing logic
+    efficientNet.py         # The Model, edited to be a feature extractor
+    scatterplot.py          # PCA and 2D visualization
+    clustering.py           # K-means feature analysis
+    utils.py                # utility functions
+---
+dataset/                    # Image source files
+output/                     # Saved plots and extracted features
 ```
 
 ## Responsibilities
