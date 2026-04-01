@@ -10,7 +10,6 @@ class Config:
 
 	# Model settings
 	MODEL_NAME: str = "efficientnet_b0"
-	MODEL_DIR: str = "../model"  # Directory to store the downloaded model weights
 	IMAGE_SIZE: int = 224  # Expected input resolution for EfficientNet-B0
 	NC: int = 3  # Number of input channels (3 = RGB Color)
 	ALWAYS_EXTRACT: bool = False  # If True, always run CNN, if false load extraction data from disc.

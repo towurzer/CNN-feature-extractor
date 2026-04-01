@@ -7,7 +7,6 @@ def create_dir(config):
 	"""
 	os.makedirs(config.DATA_DIR, exist_ok=True)
 	os.makedirs(config.OUT_DIR, exist_ok=True)
-	os.makedirs(config.MODEL_DIR, exist_ok=True)
 
 
 def saveExtractionResults(config, results):
