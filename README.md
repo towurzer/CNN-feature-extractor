@@ -23,6 +23,27 @@ dataset/                    # Image source files
 output/                     # Saved plots and extracted features
 ```
 
+## Getting Started
+### 1. Installation
+
+Run
+```bash
+pip install -r requirements.txt
+```
+to install neccessary requirements.
+
+### 2. Run the extraction pipeline**
+
+To reproduce the results, run the main extraction pipeline
+```bash
+python src/main.py
+```
++ This will Load the current Configuration
++ automatically download the dataset
++ download the model including its pretrained weigths
++ start the extraction process
++ reduce the resulting feature vectors plot them and perform the K-means clustering
+
 ## Responsibilities
 ### Giuly:
 * Step 1: Choose a Dataset  

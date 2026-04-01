@@ -1,0 +1,28 @@
+filelock @ file:///home/task_176943956686679/croot/filelock_1769440496215/work
+fsspec @ file:///home/task_177399629669182/croot/fsspec_1773996345510/work
+gmpy2 @ file:///home/task_176474799565698/conda-bld/gmpy2_1764748043526/work
+importlib_metadata @ file:///home/task_177209707684692/croot/importlib_metadata-suite_1772097099659/work
+Jinja2 @ file:///croot/jinja2_1741710844255/work
+lit @ file:///home/task_176922056067880/croot/llvm-package_1769220619639/work/llvm/utils/lit
+MarkupSafe @ file:///croot/markupsafe_1738584038848/work
+mkl-service==2.5.2
+mkl_fft @ file:///home/task_176159249290440/conda-bld/mkl_fft_1761592897595/work
+mkl_random @ file:///home/task_176159294306005/conda-bld/mkl_random_1761592958759/work
+mpmath @ file:///work/perseverance-python-buildout/croot/mpmath_1728396928682/work
+networkx @ file:///home/task_176537856615560/conda-bld/networkx_1765378627201/work
+numpy @ file:///home/task_177399618846033/croot/numpy_and_numpy_base_1773996217002/work/dist/numpy-2.4.3-cp313-cp313-linux_x86_64.whl#sha256=22ef15e275c26d3c209b2177c5c654595676aebc6273b25dab5dc2ffbeb3bb15
+opentelemetry-api @ file:///home/task_176399582131765/conda-bld/opentelemetry-api_1763996079309/work
+packaging @ file:///home/task_176104878999627/conda-bld/packaging_1761049078606/work
+pandas @ file:///home/task_177324544625498/croot/pandas_1773246060052/work
+pillow @ file:///croot/pillow_1744613067434/work
+python-dateutil @ file:///work/perseverance-python-buildout/croot/python-dateutil_1728385355105/work
+scipy==1.17.1
+setuptools==80.10.2
+six @ file:///croot/six_1744271502820/work
+sympy @ file:///home/task_176476213567317/conda-bld/sympy_1764762917555/work
+torch @ file:///home/task_177081042423342/croot/libtorch_1770810489933/work
+torchvision @ file:///home/task_177211381792981/croot/torchvision_1772114194964/work
+triton @ file:///home/task_176842156083241/croot/triton_1768421636638/work/python
+typing_extensions @ file:///croot/typing_extensions_1756280817316/work
+wheel==0.46.3
+zipp @ file:///home/task_176397781069023/conda-bld/zipp_1763977862013/work
