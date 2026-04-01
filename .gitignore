@@ -207,4 +207,7 @@ marimo/_lsp/
 __marimo__/
 
 # custom
-/src/dataset/
+.idea/
+/dataset/
+/output/
+/model/
