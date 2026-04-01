@@ -15,7 +15,7 @@ class EfficientNet(nn.Module):
         self.model = models.efficientnet_b0(weights=self.weights)
         self.setMode(train)
         # ---
-        self.extractedFeatures = {} # Buffer to store data captured by the forward hook
+        self.extractedFeatures = [] # Buffer to store data captured by the forward hook
         self.hookHandle = self.registerHook() # Register the hook to extract the intermediate Data
 
     def setMode(self, train):
@@ -34,23 +34,23 @@ class EfficientNet(nn.Module):
         # self.model.classifier = nn.Identity()
         def featureHook(module, input, output):
             # output is the result of the avg pool layer ([N, 1280, 1, 1] -> [N, 1280])
-            self.extractedFeatures['featureVector'] = torch.flatten(output, 1)
+            self.extractedFeatures = torch.flatten(output, 1)
 
         hook = self.model.avgpool.register_forward_hook(featureHook)  # Attach the hook to the avgpool layer
         return hook
 
-    def extract(self, x):
+    def extract(self, batch):
         """
         Performs a forward pass to extract both the top prediction and intermediate feature vector.
 
-        :arg x: Input image batch.
+        :arg batch: Input image batch.
 
         :return tuple: (predictions, features)
         """
         with torch.no_grad():
-            classifications = self.model(x)
+            classifications = self.model(batch)
             predictions = torch.argmax(classifications, dim=1)
-            features = self.extractedFeatures['featureVector']
+            features = self.extractedFeatures
 
 
         return predictions, features

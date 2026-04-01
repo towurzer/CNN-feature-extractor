@@ -16,4 +16,4 @@ class Config:
 
 	# Paths
 	OUT_DIR: str = "../output"  # Directory where results will be saved
-	RESULTS_FILE = "extracted_data.pkl"  # Filename for the extracted list of dictionaries containing features and labels
+	RESULTS_FILE = "extractedData.pkl"  # Filename for the extracted list of dictionaries containing features and labels
