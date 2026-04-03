@@ -6,7 +6,15 @@ class Config:
 	DATA_DIR:  str = "../dataset/"  # Path where the dataset will be downloaded/stored
 	NUM_CLASSES: int = 5  # Number of classes to work on
 	IMAGES_PER_CLASS: int = 150  # amount of images for each class
+	DATA_URL: str = "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip"
 	BATCH_SIZE: int = 32  # Number of images processed at once
+	SELECTED_CLASSES = [
+		"Faces_easy",
+		"Motorbikes",
+		"airplanes",
+		"Leopards",
+		"watch"
+	]
 
 	# Model settings
 	MODEL_NAME: str = "efficientnet_b0"
