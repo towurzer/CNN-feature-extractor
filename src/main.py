@@ -31,5 +31,5 @@ if __name__ == "__main__":
 		utils.saveExtractionResults(config, extractionResults) # Save results for fast future use
 
 	print("Running PCA and creating scatter plot")
-	plot_path = scatterplot.run_pca_scatter(extractionResults, config, show_plot=True)
+	plot_path = scatterplot.run_pca_scatter(extractionResults, config)
 	print(f"Saved PCA scatter plot to: {plot_path}")

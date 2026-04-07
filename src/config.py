@@ -25,3 +25,7 @@ class Config:
 	# Paths
 	OUT_DIR: str = "../output"  # Directory where results will be saved
 	RESULTS_FILE = "extractedData.pkl"  # Filename for the extracted list of dictionaries containing features and labels
+ 
+	# PCA scatter plot settings
+	SCATTER_PLOT_DPI: int = 180  	# DPI for the saved scatter plot image
+	DISPLAY_PCA_PLOT: bool = True  	# Whether to display the scatter plot after exectution

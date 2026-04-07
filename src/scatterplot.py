@@ -13,7 +13,7 @@ def _pca_2d(features: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 	return points_2d, explained_ratio
 
 
-def run_pca_scatter(extraction_results: list[dict], config, show_plot: bool = True) -> str:
+def run_pca_scatter(extraction_results: list[dict], config) -> str:
 	"""
 	Creates a 2D PCA scatter plot from extracted CNN features and returns the saved image path.
 	"""
@@ -51,9 +51,9 @@ def run_pca_scatter(extraction_results: list[dict], config, show_plot: bool = Tr
 
 	os.makedirs(config.OUT_DIR, exist_ok=True)
 	output_path = os.path.join(config.OUT_DIR, "pca_scatter.png")
-	plt.savefig(output_path, dpi=180)
+	plt.savefig(output_path, dpi=config.SCATTER_PLOT_DPI)
 
-	if show_plot:
+	if config.DISPLAY_PCA_PLOT:
 		plt.show()
 	else:
 		plt.close()
