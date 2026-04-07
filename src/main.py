@@ -3,6 +3,7 @@ from efficientNet import EfficientNet
 import utils
 import dataset
 import extractionhandler
+import scatterplot
 
 if __name__ == "__main__":
 	print("Starting EfficientNet")
@@ -29,5 +30,6 @@ if __name__ == "__main__":
 		print("Saving results to cache...")
 		utils.saveExtractionResults(config, extractionResults) # Save results for fast future use
 
-	print("Plotting and stuff")
-	print(extractionResults[0]) # TEMP
+	print("Running PCA and creating scatter plot")
+	plot_path = scatterplot.run_pca_scatter(extractionResults, config, show_plot=True)
+	print(f"Saved PCA scatter plot to: {plot_path}")

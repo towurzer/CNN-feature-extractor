@@ -5,7 +5,7 @@ class Config:
 	# Dataset settings
 	DATA_DIR:  str = "../dataset/"  # Path where the dataset will be downloaded/stored
 	NUM_CLASSES: int = 5  # Number of classes to work on
-	IMAGES_PER_CLASS: int = 150  # amount of images for each class
+	IMAGES_PER_CLASS: int = 200  # amount of images for each class
 	DATA_URL: str = "https://data.caltech.edu/records/mzrjq-6wc02/files/caltech-101.zip"
 	BATCH_SIZE: int = 32  # Number of images processed at once
 	SELECTED_CLASSES = [

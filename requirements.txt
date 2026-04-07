@@ -20,6 +20,7 @@ scipy==1.17.1
 setuptools==80.10.2
 six @ file:///croot/six_1744271502820/work
 sympy @ file:///home/task_176476213567317/conda-bld/sympy_1764762917555/work
+scikit-learn
 torch @ file:///home/task_177081042423342/croot/libtorch_1770810489933/work
 torchvision @ file:///home/task_177211381792981/croot/torchvision_1772114194964/work
 triton @ file:///home/task_176842156083241/croot/triton_1768421636638/work/python
