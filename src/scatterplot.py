@@ -20,8 +20,8 @@ def run_pca_scatter(extraction_results: list[dict], config) -> str:
 	if not extraction_results:
 		raise ValueError("extraction_results is empty. Run feature extraction first.")
 
-	features = np.asarray([entry["features"] for entry in extraction_results], dtype=np.float32)    # get features(=output of forward hook) as numpy array
-	labels = np.asarray([entry["label"] for entry in extraction_results], dtype=np.int32)           # get labels(=class indices) as numpy array 
+	features = np.asarray([entry["features"] for entry in extraction_results], dtype=np.float32)    # get features as numpy array
+	labels = np.asarray([entry["label"] for entry in extraction_results], dtype=np.int32)           # get labels as numpy array
 
 	points_2d, explained_ratio = _pca_2d(features)
 
@@ -49,7 +49,6 @@ def run_pca_scatter(extraction_results: list[dict], config) -> str:
 	plt.legend(loc="best", frameon=True)
 	plt.tight_layout()
 
-	os.makedirs(config.OUT_DIR, exist_ok=True)
 	output_path = os.path.join(config.OUT_DIR, "pca_scatter.png")
 	plt.savefig(output_path, dpi=config.SCATTER_PLOT_DPI)
 
