@@ -210,3 +210,4 @@ __marimo__/
 .idea/
 /dataset/
 /output/
+.DS_Store
