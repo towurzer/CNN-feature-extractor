@@ -4,6 +4,7 @@ import utils
 import dataset
 import extractionhandler
 import scatterplot
+import clustering
 
 if __name__ == "__main__":
 	print("Starting EfficientNet")
@@ -33,3 +34,9 @@ if __name__ == "__main__":
 	print("Running PCA and creating scatter plot")
 	plot_path = scatterplot.run_pca_scatter(extractionResults, config)
 	print(f"Saved PCA scatter plot to: {plot_path}")
+
+	print("Running K-Means clustering")
+	cluster_path = clustering.run_clustering_scatter(extractionResults, config)
+	print(f"Saved clustering scatter plot to: {cluster_path}")
+	print("Running inspection")
+	clustering.run_cluster_inspection(extractionResults, config)
