@@ -22,7 +22,7 @@ def extract_features(dataloader, model, config) -> list[dict]:
         batchFeaturesArray = features.cpu().numpy()
 
         thumbnails = None
-        if config.HOVER_PCA_PLOT:
+        if config.HOVER_PLOT:
             # Build compact thumbnails only when hover feature is enabled.
             thumbnails = F.interpolate(
                 images,

@@ -4,16 +4,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 from sklearn.cluster import KMeans
-from sklearn.decomposition import PCA
 from sklearn.metrics import confusion_matrix
 
-
-def _pca_2d(features: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Reduces features to 2D using sklearn PCA and returns points + explained variance ratio."""
-    pca = PCA(n_components=2)
-    points_2d = pca.fit_transform(features)          # Reduce to 2D
-    explained_ratio = pca.explained_variance_ratio_  # Get variance ratio for PC1 and PC2
-    return points_2d, explained_ratio
+from plot_hover import enable_thumbnail_hover
+from pca_scatterplot import pca_2d
 
 
 def _run_kmeans(features: np.ndarray, n_clusters: int) -> np.ndarray:
@@ -45,22 +39,23 @@ def run_clustering_scatter(extraction_results: list[dict], config) -> str:
 
     features = np.asarray([entry["features"] for entry in extraction_results], dtype=np.float32)  # shape: (N, 1280)
     labels   = np.asarray([entry["label"]    for entry in extraction_results], dtype=np.int32)    # ground-truth labels (0-4)
+    thumbnails = [entry.get("thumbnail") for entry in extraction_results]
 
     n_clusters = config.NUM_CLASSES                         # Number of clusters = number of classes (5)
     cluster_labels = _run_kmeans(features, n_clusters)      # Run K-Means on the raw 1280-D feature vectors
-    points_2d, explained_ratio = _pca_2d(features)          # Reduce to 2D only for plotting
+    points_2d, explained_ratio = pca_2d(features)          # Reduce to 2D only for plotting
 
     # --- Remap cluster IDs to best matching class IDs for consistent coloring ---
     remapped_labels = _match_clusters_to_classes(cluster_labels, labels, n_clusters)
 
     # --- Plot ---
-    plt.figure(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 7))
     cmap = plt.cm.get_cmap("tab10", n_clusters)             # Same colormap as PCA scatter
 
     for label_id in range(n_clusters):
         mask = remapped_labels == label_id                  # Select points assigned to this class
         class_name = config.SELECTED_CLASSES[label_id]
-        plt.scatter(
+        ax.scatter(
             points_2d[mask, 0],                             # x coordinates (PC1)
             points_2d[mask, 1],                             # y coordinates (PC2)
             s=22,
@@ -69,23 +64,24 @@ def run_clustering_scatter(extraction_results: list[dict], config) -> str:
             label=class_name,                               # Show class name instead of cluster number
         )
 
+    enable_thumbnail_hover(fig, ax, points_2d, thumbnails, config)
+
     ratio_pc1 = explained_ratio[0] * 100.0
     ratio_pc2 = explained_ratio[1] * 100.0
-    plt.xlabel(f"PC1 ({ratio_pc1:.1f}% explained variance)")
-    plt.ylabel(f"PC2 ({ratio_pc2:.1f}% explained variance)")
-    plt.title("K-Means Clustering of CNN Features")
-    plt.legend(loc="best", frameon=True)
-    plt.tight_layout()
+    ax.set_xlabel(f"PC1 ({ratio_pc1:.1f}% explained variance)")
+    ax.set_ylabel(f"PC2 ({ratio_pc2:.1f}% explained variance)")
+    ax.set_title("K-Means Clustering of CNN Features, visualized with PCA and colored by K-means Clustering")
+    ax.legend(loc="best", frameon=True)
+    fig.tight_layout()
 
     output_path = os.path.join(config.OUT_DIR, "clustering_scatter.png")
-    plt.savefig(output_path, dpi=config.SCATTER_PLOT_DPI)
+    fig.savefig(output_path, dpi=config.PLOT_DPI)
 
-    if config.DISPLAY_PCA_PLOT:
+    if config.DISPLAY_PLOT:
         plt.show()
     else:
-        plt.close()
+        plt.close(fig)
 
-    print(f"Clustering scatter plot saved to: {output_path}")
     return output_path
 
 
@@ -96,19 +92,20 @@ def run_cluster_inspection(extraction_results: list[dict], config) -> str:
 
     features    = np.asarray([entry["features"] for entry in extraction_results], dtype=np.float32)
     true_labels = np.asarray([entry["label"]    for entry in extraction_results], dtype=np.int32)
+    thumbnails = [entry.get("thumbnail") for entry in extraction_results]
 
     n_clusters     = config.NUM_CLASSES
     cluster_labels = _run_kmeans(features, n_clusters)
     remapped_labels = _match_clusters_to_classes(cluster_labels, true_labels, n_clusters)
-    points_2d, explained_ratio = _pca_2d(features)
+    points_2d, explained_ratio = pca_2d(features)
 
     # Boolean mask: True = correctly assigned, False = wrong
     correct_mask = remapped_labels == true_labels
 
-    plt.figure(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     # Plot correct points (green)
-    plt.scatter(
+    ax.scatter(
         points_2d[correct_mask, 0],
         points_2d[correct_mask, 1],
         s=22, alpha=0.75, color="green",
@@ -116,30 +113,30 @@ def run_cluster_inspection(extraction_results: list[dict], config) -> str:
     )
 
     # Plot incorrect points (red)
-    plt.scatter(
+    ax.scatter(
         points_2d[~correct_mask, 0],
         points_2d[~correct_mask, 1],
         s=22, alpha=0.75, color="red",
         label=f"Incorrect ({(~correct_mask).sum()})",
     )
 
+    enable_thumbnail_hover(fig, ax, points_2d, thumbnails, config)
+
     ratio_pc1 = explained_ratio[0] * 100.0
     ratio_pc2 = explained_ratio[1] * 100.0
-    plt.xlabel(f"PC1 ({ratio_pc1:.1f}% explained variance)")
-    plt.ylabel(f"PC2 ({ratio_pc2:.1f}% explained variance)")
-    plt.title("K-Means Clustering: Correct vs. Incorrect ")
-    plt.legend(loc="best", frameon=True)
-    plt.tight_layout()
+    ax.set_xlabel(f"PC1 ({ratio_pc1:.1f}% explained variance)")
+    ax.set_ylabel(f"PC2 ({ratio_pc2:.1f}% explained variance)")
+    ax.set_title("K-Means Clustering: Correct vs. Incorrect, visualized with PCA")
+    ax.legend(loc="best", frameon=True)
+    fig.tight_layout()
 
     output_path = os.path.join(config.OUT_DIR, "clustering_correct_incorrect.png")
-    plt.savefig(output_path, dpi=config.SCATTER_PLOT_DPI)
+    fig.savefig(output_path, dpi=config.PLOT_DPI)
 
-    if config.DISPLAY_PCA_PLOT:
+    if config.DISPLAY_PLOT:
         plt.show()
     else:
-        plt.close()
-
-    print(f"Correct/incorrect scatter plot saved to: {output_path}")
+        plt.close(fig)
 
     total_correct = int((confusion_matrix(true_labels, remapped_labels)).trace())
     total = len(true_labels)

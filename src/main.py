@@ -3,7 +3,7 @@ from efficientNet import EfficientNet
 import utils
 import dataset
 import extractionhandler
-import scatterplot
+import pca_scatterplot
 import clustering
 
 if __name__ == "__main__":
@@ -32,11 +32,12 @@ if __name__ == "__main__":
 		utils.saveExtractionResults(config, extractionResults) # Save results for fast future use
 
 	print("Running PCA and creating scatter plot")
-	plot_path = scatterplot.run_pca_scatter(extractionResults, config)
+	plot_path = pca_scatterplot.run_pca_scatter(extractionResults, config)
 	print(f"Saved PCA scatter plot to: {plot_path}")
 
 	print("Running K-Means clustering")
 	cluster_path = clustering.run_clustering_scatter(extractionResults, config)
 	print(f"Saved clustering scatter plot to: {cluster_path}")
 	print("Running inspection")
-	clustering.run_cluster_inspection(extractionResults, config)
+	inspection_path = clustering.run_cluster_inspection(extractionResults, config)
+	print(f"Saved cluster inspection scatter plot to: {inspection_path}")
