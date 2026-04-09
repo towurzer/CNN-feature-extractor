@@ -26,7 +26,7 @@ if __name__ == "__main__":
 		print("Dataloader Created, creating the model, loading pretrained weights, registering the hook")
 		model = EfficientNet(train=False)  # download the model, apply weights and register the forward hook
 		print("Model Loaded, starting Feature Extraction...")
-		extractionResults = extractionhandler.extract_features(dataloader, model) # run the classification and feature extraction
+		extractionResults = extractionhandler.extract_features(dataloader, model, config) # run the classification and feature extraction
 		print(f"Extraction Complete! Total images processed: {len(extractionResults)}")
 		print("Saving results to cache...")
 		utils.saveExtractionResults(config, extractionResults) # Save results for fast future use

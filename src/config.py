@@ -27,5 +27,7 @@ class Config:
 	RESULTS_FILE = "extractedData.pkl"  # Filename for the extracted list of dictionaries containing features and labels
  
 	# PCA scatter plot settings
-	SCATTER_PLOT_DPI: int = 180  	# DPI for the saved scatter plot image
+	SCATTER_PLOT_DPI: int = 220  	# DPI for the saved scatter plot image
 	DISPLAY_PCA_PLOT: bool = True  	# Whether to display the scatter plot after exectution
+	HOVER_PCA_PLOT: bool = True	# Whether to show image thumbnails on hover in the PCA plot
+	THUMBNAIL_SIZE: int = 64	# Size of the stored hover thumbnails
