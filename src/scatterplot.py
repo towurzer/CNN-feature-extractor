@@ -55,15 +55,16 @@ def run_pca_scatter(extraction_results: list[dict], config) -> str:
 			color=cmap(int(label)),
 		)
 
-	hover_scatter = ax.scatter(
-		points_2d[:, 0],
-		points_2d[:, 1],
-		s=28,
-		alpha=0.0,
-		picker=True,
-	)
-
 	if config.HOVER_PCA_PLOT and any(isinstance(img, np.ndarray) for img in thumbnails):
+		# Create an invisible scatter plot for hover feature.
+		hover_scatter = ax.scatter(
+			points_2d[:, 0],
+			points_2d[:, 1],
+			s=28,
+			alpha=0.0,
+			picker=True,
+		)
+
 		imagebox = OffsetImage(np.zeros((config.THUMBNAIL_SIZE, config.THUMBNAIL_SIZE, 3), dtype=np.float32), zoom=1.25)
 		annot = AnnotationBbox(
 			imagebox,
