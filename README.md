@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ```
 to install neccessary requirements.
 
-### 2. Run the extraction pipeline**
+### 2. Run the extraction pipeline
 
 To reproduce the results, run the main extraction pipeline
 ```bash
@@ -42,7 +42,10 @@ python src/main.py
 + automatically download the dataset
 + download the model including its pretrained weigths
 + start the extraction process
-+ reduce the resulting feature vectors plot them and perform the K-means clustering
++ reduce the resulting feature vectors plot them
++ perform the K-means clustering and plot them
++ compare the feature vector and K-means plot and compare them for differences, shown in another plot
++ automatically open all the plots
 
 ## Responsibilities
 ### Giuly:

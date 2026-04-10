@@ -38,6 +38,13 @@ if __name__ == "__main__":
 	print("Running K-Means clustering")
 	cluster_path = clustering.run_clustering_scatter(extractionResults, config)
 	print(f"Saved clustering scatter plot to: {cluster_path}")
+
 	print("Running inspection")
-	inspection_path = clustering.run_cluster_inspection(extractionResults, config)
+	inspection_path, total_correct, total = clustering.run_cluster_inspection(extractionResults, config)
 	print(f"Saved cluster inspection scatter plot to: {inspection_path}")
+	
+	# Print results
+	print("----------------------------------------------------")
+	print("Inspection Results: ")
+	print(f"Total correct: {total_correct}/{total}  ({100 * total_correct / total:.1f}%)")
+	print(f"Total incorrect: {total - total_correct}/{total}  ({100 * (total - total_correct) / total:.1f}%)")

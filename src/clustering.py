@@ -140,7 +140,5 @@ def run_cluster_inspection(extraction_results: list[dict], config) -> str:
 
     total_correct = int((confusion_matrix(true_labels, remapped_labels)).trace())
     total = len(true_labels)
-    print(f"\nTotal correct: {total_correct}/{total}  ({100 * total_correct / total:.1f}%)")
-    print(f"Total incorrect: {total - total_correct}/{total}  ({100 * (total - total_correct) / total:.1f}%)")
 
-    return output_path
+    return output_path, total_correct, total
