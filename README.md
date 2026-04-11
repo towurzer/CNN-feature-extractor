@@ -47,6 +47,14 @@ python src/main.py
 + compare the feature vector and K-means plot and compare them for differences, shown in another plot
 + automatically open all the plots
 
+## Results:
+Shown below are the Scatter plots of the feature vectors, the Clustering as well as the plot comparing the other two 
+plots, whereby 996/1000 pictures where classified correctly.
+![pca_scatter.png](readme_Images/pca_scatter.png)
+![clustering_scatter.png](readme_Images/clustering_scatter.png)
+![clustering_correct_incorrect.png](readme_Images/clustering_correct_incorrect.png)
+
+---
 ## Responsibilities
 ### Giuly:
 * Step 1: Choose a Dataset  
