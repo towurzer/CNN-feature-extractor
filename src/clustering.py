@@ -78,7 +78,7 @@ def run_clustering_scatter(extraction_results: list[dict], config) -> str:
     fig.savefig(output_path, dpi=config.PLOT_DPI)
 
     if config.DISPLAY_PLOT:
-        plt.show()
+        plt.show(block=False)
     else:
         plt.close(fig)
 
@@ -134,7 +134,7 @@ def run_cluster_inspection(extraction_results: list[dict], config) -> str:
     fig.savefig(output_path, dpi=config.PLOT_DPI)
 
     if config.DISPLAY_PLOT:
-        plt.show()
+        plt.show(block=False)
     else:
         plt.close(fig)
 

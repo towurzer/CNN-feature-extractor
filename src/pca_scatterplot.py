@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 from sklearn.decomposition import PCA
+from sympy import false
 
 from plot_hover import enable_thumbnail_hover
 
@@ -70,7 +71,7 @@ def run_pca_scatter(extraction_results: list[dict], config) -> str:
 	fig.savefig(output_path, dpi=config.PLOT_DPI)
 
 	if config.DISPLAY_PLOT:
-		plt.show()
+		plt.show(block=False)
 	else:
 		plt.close(fig)
 

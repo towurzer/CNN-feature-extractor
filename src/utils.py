@@ -1,5 +1,6 @@
 import os
 import pickle
+import matplotlib.pyplot as plt
 def create_dir(config):
 	"""
 	Creates the necessary project directories if they do not already exist.
@@ -40,3 +41,11 @@ def loadExtractionResults(config) -> list[dict] | None:
 		return data
 	print("No previous results found, starting from scratch")
 	return None
+
+
+def gracefulExit():
+	"""Wait for all pots to be closed before exiting"""
+	while plt.get_fignums():
+		plt.pause(0.1)
+
+	exit(0)

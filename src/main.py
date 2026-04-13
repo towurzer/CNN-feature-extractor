@@ -48,3 +48,4 @@ if __name__ == "__main__":
 	print("Inspection Results: ")
 	print(f"Total correct: {total_correct}/{total}  ({100 * total_correct / total:.1f}%)")
 	print(f"Total incorrect: {total - total_correct}/{total}  ({100 * (total - total_correct) / total:.1f}%)")
+	utils.gracefulExit()
