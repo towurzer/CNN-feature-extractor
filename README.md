@@ -36,7 +36,10 @@ to install neccessary requirements.
 
 To reproduce the results, run the main extraction pipeline
 ```bash
-python src/main.py
+cd src/
+```
+```bash
+python main.py
 ```
 + This will Load the current Configuration
 + automatically download the dataset
